@@ -639,7 +639,6 @@ def acceptance():
 										setupGraphapiOIdC() +
 										buildGlauth() +
 										buildKonnectd() +
-										buildOcisWeb() +
 										konnectdService() +
 										webService() +
 										glauthService()+
@@ -1413,26 +1412,6 @@ def ocisService():
 			'mkdir -p /srv/app/tmp/ocis/owncloud/data/',
 			'mkdir -p /srv/app/tmp/ocis/storage/users/',
 			'./ocis --log-level debug server'
-		],
-		'volumes': [{
-			'name': 'gopath',
-			'path': '/srv/app',
-		}, {
-			'name': 'configs',
-			'path': '/srv/config'
-		}],
-	}]
-
-def buildOcisWeb():
-	return[{
-		'name': 'build-ocis-web',
-		'image': 'webhippie/golang:1.13',
-		'pull': 'always',
-		'commands': [
-			'cd $GOPATH/src/github.com/owncloud/ocis',
-			'cd web',
-			'make build',
-			'cp bin/web /var/www/owncloud/ocis-web'
 		],
 		'volumes': [{
 			'name': 'gopath',
