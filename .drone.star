@@ -641,7 +641,7 @@ def acceptance():
 										buildKonnectd() +
 										buildOcisWeb() +
 										konnectdService() +
-										ocisWebService() +
+										webService() +
 										glauthService()+
 										fixPermissions()
 									) if not params['runningOnOCIS'] else (
@@ -1443,8 +1443,8 @@ def buildOcisWeb():
 		}],
 	}]
 
-# Ocis-web service just for the oc10 tests
-def ocisWebService():
+# web service for the acceptance tests
+def webService():
 	return[{
 		'name': 'web',
 		'image': 'webhippie/golang:1.13',
@@ -1457,7 +1457,7 @@ def ocisWebService():
 		},
 		'commands': [
 			'cd /var/www/owncloud',
-			'./ocis-web --log-level debug server',
+			'./web --log-level debug server',
 		],
 		'volumes': [{
 			'name': 'gopath',
